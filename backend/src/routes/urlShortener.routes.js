@@ -1,5 +1,5 @@
 import express from 'express';
-import { createShortUrl } from '../controllers/urlShortner.controller.js';
+import { createShortUrl } from '../controllers/urlShortener.controller.js';
 const router = express.Router();
 
 router.post('/', createShortUrl)

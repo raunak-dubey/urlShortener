@@ -5,18 +5,22 @@ const handleDuplicateFieldsDB = err => AppError.conflict('Duplicate field value 
 const handleValidationErrorDB = err => AppError.badRequest(err.message);
 
 export const errorHandler = (err, req, res, next) => {
+  // Copy the error to avoid mutating original
   let error = { ...err };
-  error.message = err.message;
-  err.statusCode = err.statusCode || 500;
-  err.status = err.status || 'error';
-
+  // Ensure message and status fields are present on the cloned object
+  error.message = err.message || error.message || 'Something went wrong';
+  error.statusCode = err.statusCode || error.statusCode || 500;
+  error.status = err.status || error.status || 'error';
 
   if (err.name === 'CastError') error = handleCastErrorDB(err);
   if (err.code === 11000) error = handleDuplicateFieldsDB(err);
   if (err.name === 'ValidationError') error = handleValidationErrorDB(err);
 
-  res.status(error.statusCode).json({
+  // Make sure statusCode is an integer and fallback to 500
+  const statusCode = Number.isInteger(error.statusCode) ? error.statusCode : 500;
+
+  res.status(statusCode).json({
     success: false,
-    message: err.message || 'Something went wrong',
+    message: error.message || 'Something went wrong',
   });
 };
