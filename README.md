@@ -1,4 +1,3 @@
-
 # URL Shortener — Full Project (Backend + Frontend)
 
 This repository contains a simple URL shortener service split into two folders:
@@ -20,16 +19,17 @@ All terminal commands below use Windows PowerShell examples. Adjust for other sh
 
 Location: `backend/`
 
-1. Install dependencies
+1.  Install dependencies
 
     cd backend
     npm install
 
-2. Create a `.env` file in `backend/` with at least:
-
+2.  Create a `.env` file in `backend/` with at least:
+```
     PORT=
     APP_URL=http://localhost:
     MONGO_URI=mongodb://localhost:27017/
+```
 
 3. Start in development (uses nodemon):
 
@@ -94,3 +94,4 @@ If you'd like a single-command workflow, I can add a root `package.json` that us
 ---
 
 If you want, I can implement any of the improvements above (create example env files, add a root `package.json` to start both, or wire a simple Docker Compose file). Tell me which and I'll add it.
+```

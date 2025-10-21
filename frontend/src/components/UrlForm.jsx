@@ -1,12 +1,14 @@
 "use client";
-import { useState } from "react";
-import axios from "axios";
+import { use, useState } from "react";
+import { createShortUrl } from "@/api/shortUrl.api";
+import { useQueryClient } from "@tanstack/react-query";
 
 const UrlForm = () => {
   const [url, setUrl] = useState("");
   const [shortUrl, setShortUrl] = useState("");
   const [loading, setLoading] = useState(false);
   const [msg, setMsg] = useState("");
+  const queryClient = useQueryClient();
 
   const isValidUrl = (value) => {
     try {
@@ -32,35 +34,17 @@ const UrlForm = () => {
 
     setLoading(true);
     try {
-      const res = await axios.post(`http://localhost:3000/api/create`, { originalUrl: url.trim() });
-      console.log("Hello");
-      
-      const data = res.data;
-      console.log('response data', data);
-      if (res.status >= 400) {
-        setMsg(data?.message || "Failed to create short url");
-      } else {
-        const token = data?.data?.shortUrl || data?.shortUrl || data?.short;
-        if (!token) {
-          setMsg("Unexpected response from server.");
-        } else {
-          if (token.startsWith && token.startsWith('http')) {
-            setShortUrl(token);
-          } else {
-            setShortUrl(`http://localhost:3000/${token}`);
-          }
-        }
-      }
+      const shortUrl = await createShortUrl(url.trim());
+      if (!shortUrl) throw new Error(res?.message || "Invalid response");
+      const baseUrl = "http://localhost:3000";
+      setShortUrl(
+        shortUrl.startsWith("http") ? shortUrl : `${baseUrl}/${shortUrl}`
+      );
+      queryClient.invalidateQueries({ queryKey: ["userUrls"] });
+      setMsg("");
     } catch (err) {
-      console.error('request error', err);
-      if (err.response) {
-        setMsg(err.response.data?.message || `Failed to create short url (${err.response.status})`);
-      } else if (err.request) {
-        // request made but no response
-        setMsg('No response from backend. Is the backend running?');
-      } else {
-        setMsg('Network error. Check your backend or modify the endpoint.');
-      }
+      console.error("request error", err);
+      setMsg(err.message || "Failed to create short url");
     } finally {
       setLoading(false);
     }
