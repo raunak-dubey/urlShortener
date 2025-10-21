@@ -1,97 +1,50 @@
-# URL Shortener — Full Project (Backend + Frontend)
+# URL Shortener — Full Project
 
-This repository contains a simple URL shortener service split into two folders:
+This repository contains a URL shortener application with a backend API and a frontend UI.
 
-- `backend/` — Express + MongoDB API that creates and redirects short URLs
-- `frontend/` — Next.js frontend (React) that consumes the API
+Structure
 
-This README gives a quick start to run each part locally and tips for development.
+- `backend/` — Express.js API that creates and resolves short URLs using MongoDB
+- `frontend/` — Next.js application that provides the user interface
 
-## Prerequisites
+Prerequisites
 
-- Node.js (18+ recommended)
+- Node.js
 - npm (or yarn/pnpm)
-- MongoDB (local or remote)
+- MongoDB (for the backend)
 
-All terminal commands below use Windows PowerShell examples. Adjust for other shells as needed.
+Backend (location: `backend/`)
 
-## Backend
-
-Location: `backend/`
-
-1.  Install dependencies
+Install and run:
 
     cd backend
     npm install
+    npm run dev
 
-2.  Create a `.env` file in `backend/` with at least:
-```
+Environment (create `backend/.env`):
+
     PORT=
     APP_URL=http://localhost:
     MONGO_URI=mongodb://localhost:27017/
-```
 
-3. Start in development (uses nodemon):
+API endpoints (examples):
 
-    npm run dev
+- POST /api/create — create a short URL; JSON body: { "originalUrl": "https://..." }
+- GET /:id — redirect to stored original URL and increment click count
 
-API highlights
+Frontend (location: `frontend/`)
 
-- POST /api/create — create a short URL (JSON body: `{ "originalUrl": "https://..." }`)
-- GET /:id — redirect to original URL and increment click count
-
-See `backend/README.md` for more detailed API examples and troubleshooting.
-
-## Frontend
-
-Location: `frontend/`
-
-1. Install dependencies
+Install and run:
 
     cd frontend
     npm install
-
-2. (Optional) Create `.env.local` in `frontend/` if you want to set an API base URL, e.g.:
-
-    NEXT_PUBLIC_API_URL=http://localhost:3000/api
-
-3. Start the dev server (configured to use port 3001):
-
     npm run dev
 
-Open http://localhost:3001 in your browser.
+Environment (optional):
 
-## Running both services locally
+Create `frontend/.env.local` to set public variables such as `NEXT_PUBLIC_API_URL`.
 
-You can run the backend and frontend in separate terminals:
+Default ports
 
-Terminal 1 (backend):
-
-    cd backend; npm run dev
-
-Terminal 2 (frontend):
-
-    cd frontend; npm run dev
-
-If you'd like a single-command workflow, I can add a root `package.json` that uses `concurrently` to start both.
-
-## Ports and Defaults
-
-- Backend: default example uses port 3000 (configurable via `backend/.env`)
-- Frontend dev: configured to port 3001 in `frontend/package.json` (`next dev -p 3001`)
-
-## Testing and Linting
-
-- Backend: no automated tests included by default; see suggestions in `backend/README.md`.
-- Frontend: run `npm run lint` in `frontend/` to run ESLint.
-
-## Next improvements (suggestions)
-
-- Add a root-level `package.json` with a `dev` script to run both services concurrently.
-- Add a sample `.env.local.example` and `.env.example` files for frontend/backend respectively.
-- Add automated tests for backend endpoints (using `supertest`) and simple component tests for the frontend.
-
----
-
-If you want, I can implement any of the improvements above (create example env files, add a root `package.json` to start both, or wire a simple Docker Compose file). Tell me which and I'll add it.
-```
+- Backend: `PORT` from `backend/.env` (example 3000)
+- Frontend dev: port configured in `frontend/package.json` (example 3001)

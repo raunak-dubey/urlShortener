@@ -1,108 +1,45 @@
 
 # URL Shortener — Frontend
 
-This directory contains the Next.js frontend for the URL Shortener project. It provides a small UI to create shortened URLs and redirect to original links.
+This frontend is a Next.js application that provides a user interface to create and use shortened URLs.
 
-## Quick overview
+Technology
 
-- Framework: Next.js 15
-- React: 19
-- Styling: Tailwind CSS (configured in the project)
-- HTTP client: axios
+- Next.js
+- React
+- Tailwind CSS
+- axios for HTTP requests
 
-## Prerequisites
+Prerequisites
 
-- Node.js (recommended 18.x or newer)
-- npm (or yarn/pnpm) — this README uses npm examples
+- Node.js
+- npm (or yarn/pnpm)
 
-On Windows PowerShell, the commands below will work as-is.
+Install and run (from `frontend/`)
 
-## Install
+	npm install
+	npm run dev
 
-Run from the `frontend` folder:
+Scripts (in `package.json`)
 
-```powershell
-cd frontend
-npm install
-```
+- dev — start the development server
+- build — build the app for production
+- start — start the production server
+- lint — run ESLint
 
-## Available scripts
+Environment
 
-The project scripts are defined in `package.json`.
+Use `frontend/.env.local` to set public environment variables (for example `NEXT_PUBLIC_API_URL` to point to the backend API).
 
-- npm run dev — Start the Next.js dev server on port 3001 (uses turbopack)
-- npm run build — Build the app for production
-- npm run start — Start the production server after building
-- npm run lint — Run ESLint
+Project structure (key folders)
 
-Example (development):
+- `src/app` — application entry (pages and layout)
+- `src/components` — React components
+- `src/api` — client-side API helpers
+- `src/utils` — shared utilities (axios instance)
+- `public` — static assets
 
-```powershell
-npm run dev
-```
+API integration
 
-Open http://localhost:3001 in your browser.
+The frontend sends requests to the backend API (example endpoint used: `/api/create`) to create short URLs and uses returned tokens or URLs to present shortened links to the user.
 
-## Environment / Backend
-
-The frontend expects the backend API to be available. By default this project does not hard-code a backend URL. If you need to point the frontend to a running backend, add configuration in one of the following ways:
-
-- Use environment variables in Next.js (for example, create a `.env.local` file in `frontend/` with keys like `NEXT_PUBLIC_API_URL=http://localhost:3000/api`)
-- Or update the API helper in `src/utils` to use the proper base URL.
-
-When using `.env.local`, restart the dev server after changing it.
-
-## Project structure
-
-Key folders and files:
-
-- `src/app` — Next.js app folder (layouts and pages)
-- `src/components` — React components (for example `UrlForm.jsx`)
-- `src/api` — Client-side API utilities
-- `public` — Static assets
-- `package.json` — npm scripts and dependencies
-
-## Linting & Formatting
-
-ESLint is configured. Run:
-
-```powershell
-npm run lint
-```
-
-Add Prettier or other formatters if you'd like; none are required by default.
-
-## Build & Run (Production)
-
-1. Build the app:
-
-```powershell
-npm run build
-```
-
-2. Start the production server:
-
-```powershell
-npm run start
-```
-
-Consider using a process manager (pm2, systemd, Docker) for production deployments.
-
-## Notes and tips
-
-- The dev server is configured to use port 3001. If you prefer port 3000, change the `dev` script in `package.json`.
-- Next.js turbopack flags are used by default; remove `--turbopack` from scripts if you encounter issues.
-- If you add new environment variables, follow Next.js conventions and prefix public variables with `NEXT_PUBLIC_`.
-
-## Troubleshooting
-
-- If the page is blank, check the browser console and the terminal for Next.js errors.
-- If API calls fail, ensure the backend is running and `NEXT_PUBLIC_API_URL` (or the helper) points to the correct host.
-
----
-
-If you'd like, I can also:
-
-- add a sample `.env.local` example file,
-- update the frontend to use a configurable `NEXT_PUBLIC_API_URL`, or
-- add a short setup script to start both backend and frontend concurrently.
