@@ -1,0 +1,15 @@
+// palette inspired by pink/purple theme, dark first
+$bg: #07060a;
+$panel: #0e0b12;
+$muted: #9aa0a6;
+$white: #e9eef8;
+
+$accent-1: #ff52a7; // hot pink
+$accent-2: #7c3aed; // purple
+$accent-grad: linear-gradient(135deg, $accent-1 0%, $accent-2 100%);
+
+
+
+$glass: rgba(255,255,255,0.03);
+$glass-2: rgba(255,255,255,0.02);
+$border: rgba(255,255,255,0.05);

@@ -1,15 +1,12 @@
 import axios from 'axios';
 
 const axiosInstance = axios.create({
-    baseURL: "http://localhost:3000",
+    baseURL: process.env.NEXT_PUBLIC_API_URL || "http://localhost:3000",
     timeout: 10000,
     withCredentials: true,
-    headers: {
-        'Content-Type': 'application/json',
-    },
+    headers: { 'Content-Type': 'application/json' },
 });
 
-// Centralized response/error handler
 axiosInstance.interceptors.response.use(
     (response) => response,
     (error) => {
@@ -23,14 +20,12 @@ axiosInstance.interceptors.response.use(
             return Promise.reject(err);
         }
 
-        // Request made but no response received
         if (error.request) {
-            const err = new Error('No response from server. Is the backend running?');
-            err.request = error.request;
-            return Promise.reject(err);
+            return Promise.reject(
+                new Error("No response from server. Is backend running?")
+            );
         }
 
-        // Something happened in setting up the request
         return Promise.reject(new Error(error.message || 'Network error'));
     }
 );

@@ -1,0 +1,96 @@
+@import "../base/vars";
+@import "../base/mixins";
+
+.urlForm {
+    width: 100%;
+    max-width: 600px;
+    padding: 0 1rem;
+
+    label {
+        display: block;
+        color: $muted;
+        font-size: 0.95rem;
+        margin-bottom: 0.8rem;
+    }
+
+    form {
+        @include flex;
+        justify-content: space-between;
+        gap: 1rem;
+        background: $glass;
+        border: 1px solid $border;
+        border-radius: 14px;
+        padding: 1rem 1.2rem;
+
+        div {
+            width: 100%;
+            display: flex;
+        }
+
+        input {
+            flex: 1;
+            background: transparent;
+            border: none;
+            color: $white;
+            font-size: 1rem;
+            outline: none;
+
+            &::placeholder {
+                color: $muted;
+            }
+        }
+
+        button {
+            @include btn;
+        }
+    }
+
+    .resultBox {
+        margin-top: 1.8rem;
+        background: $glass;
+        border: 1px solid $border;
+        border-radius: 14px;
+        padding: 1.2rem 1.5rem;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        gap: 1rem;
+        animation: fadeIn 0.4s ease forwards;
+
+        a {
+            color: $accent-1;
+            font-weight: 600;
+            word-break: break-all;
+            text-decoration: none;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+
+            &:hover {
+                text-decoration: underline;
+            }
+        }
+
+        div {
+            display: flex;
+            gap: 1.2vw;
+        }
+
+        button {
+            @include btn;
+        }
+    }
+
+
+    @keyframes fadeIn {
+        from {
+            opacity: 0;
+            transform: translateY(10px);
+        }
+
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+}

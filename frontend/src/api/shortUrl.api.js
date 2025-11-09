@@ -1,7 +1,7 @@
 import axiosInstance from "@/utils/axiosInstance";
 
-export const createShortUrl = async (originalUrl, slug) => {
-    if (!originalUrl) throw new Error('originalUrl is required');
-  const {data} = await axiosInstance.post('/api/create', {originalUrl, slug});
+export const createShortUrl = async (url, slug) => {
+    if (!url) throw new Error('url is required');
+  const {data} = await axiosInstance.post('/create', {url, slug});
   return data.shortUrl;
 }

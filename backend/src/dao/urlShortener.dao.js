@@ -1,4 +1,4 @@
-import urlShortener from "../model/urlShortener.model.js";
+import urlShortener from "../models/urlShortener.model.js";
 import AppError from "../utils/appError.utils.js";
 
 export const saveShortUrl = async (shortUrl, originalUrl, userId) => {
@@ -27,4 +27,13 @@ export const getShortUrlEntry = async (shortUrl) => {
         { $inc: { clicks: 1 } },
         { new: true }
     );
+}
+
+export const getCustomUrl = async (slug) => {
+    try {
+        const customUrl = await urlShortener.findOne({ shortUrl: slug });
+        return customUrl;
+    } catch (err) {
+        throw AppError.internal(err.message || "Database error while fetching custom URL");
+    }
 }

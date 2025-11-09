@@ -1,0 +1,82 @@
+@import "../base/vars";
+@import "../base/mixins";
+
+.nav {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 80;
+  padding: 14px 0;
+  transition: background 0.28s ease, border 0.28s ease, transform 0.2s ease;
+  background: transparent;
+
+  .container {
+    @include flex;
+    justify-content: center;
+  }
+
+  .row {
+    width: 100%;
+    max-width: 1200px;
+     @include flex;
+    justify-content: space-between;
+    gap: 16px;
+  }
+
+  .left {
+     @include flex;
+    gap: 12px;
+  }
+
+  .logo {
+    width: 42px;
+    height: 42px;
+    border-radius: 10px;
+    background: linear-gradient(135deg, $accent-1, $accent-2);
+     @include flex;
+    justify-content: center;
+    color: #fff;
+    font-weight: 800;
+    box-shadow: 0 6px 30px rgba(124, 58, 237, 0.14);
+  }
+
+  .brand {
+    font-family: Momo;
+    color: $accent-1;
+    margin-left: 6px;
+    font-size: 1.5vw;
+    text-decoration: none;
+  }
+
+  .links {
+     @include flex;
+    gap: 3vw;
+
+    a {
+      color: $white;
+      text-decoration: none;
+      transition: color .18s, transform .18s;
+
+      &:nth-child(1):hover {
+        color: $accent-1;
+        transform: translateY(-2px);
+      }
+
+      &:nth-child(2):hover {
+        opacity: 0.9;
+        transform: translateY(-2px);
+      }
+    }
+  }
+
+  &.solid {
+    background: linear-gradient(180deg, rgba(255, 255, 255, 0.02), rgba(255, 255, 255, 0.01));
+    border-bottom: 1px solid rgba(255, 255, 255, 0.04);
+    backdrop-filter: blur(8px);
+  }
+
+  .cta {
+    @include btn;
+  }
+}

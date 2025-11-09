@@ -1,0 +1,132 @@
+@import "../../base/mixins";
+@import "../../base/vars";
+
+.authWrapper {
+    min-height: 100vh;
+    @include flex;
+    justify-content: center;
+    background: radial-gradient(600px 400px at 10% 10%, rgba(255, 82, 167, 0.04), transparent),
+        radial-gradient(600px 400px at 90% 90%, rgba(124, 58, 237, 0.04), transparent),
+        $bg;
+    color: $white;
+    padding: 2rem;
+}
+
+.authCard {
+    width: 100%;
+    max-width: 420px;
+    background: linear-gradient(180deg, rgba(255, 255, 255, 0.04), rgba(255, 255, 255, 0.02));
+    border: 1px solid $border;
+    border-radius: 16px;
+    padding: 2rem;
+    backdrop-filter: blur(10px);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+    text-align: left;
+
+    h1 {
+        font-size: 1.6rem;
+        margin-bottom: 0.3rem;
+    }
+
+    p {
+        color: $muted;
+        margin-bottom: 1.5rem;
+        font-size: 0.9rem;
+    }
+
+    form {
+        display: flex;
+        flex-direction: column;
+        gap: 1rem;
+
+        label {
+            display: flex;
+            flex-direction: column;
+            gap: 0.4rem;
+            font-size: 0.9rem;
+            color: $white;
+
+            input {
+                background: rgba(255, 255, 255, 0.04);
+                border: 1px solid $border;
+                border-radius: 10px;
+                padding: 0.7rem 1rem;
+                color: $white;
+                font-size: 0.95rem;
+                outline: none;
+                transition: border 0.2s ease;
+
+                &:focus {
+                    border-color: $accent-1;
+                }
+            }
+        }
+    }
+}
+
+.passwordField {
+    position: relative;
+    display: flex;
+
+    input {
+        flex: 1;
+    }
+
+    button {
+        position: absolute;
+        right: 10px;
+        top: 50%;
+        transform: translateY(-50%);
+        background: none;
+        border: none;
+        color: $muted;
+        font-size: 0.85rem;
+        cursor: pointer;
+    }
+}
+
+.formFooter {
+    @include flex;
+    justify-content: space-between;
+    font-size: 0.85rem;
+    color: $muted;
+
+    a {
+        color: $white;
+        text-decoration: underline;
+    }
+
+    label{
+        flex-direction: row !important;
+    }
+    input {
+        margin-right: 6px;
+    }
+}
+
+.error {
+    color: #f87171;
+    font-size: 0.85rem;
+}
+
+.success {
+    color: #4ade80;
+    font-size: 0.85rem;
+}
+
+.btn {
+    @include btn;
+    width: 100%;
+    font-size: 1rem;
+}
+
+.switch {
+    text-align: center;
+    font-size: 0.9rem;
+    color: $muted;
+
+    a {
+        color: $white;
+        text-decoration: underline;
+    }
+}

@@ -6,10 +6,11 @@ const urlShortenerSchema = new mongoose.Schema({
         required: true 
     },
     shortUrl: { 
-        type: String, 
-        required: true, 
+        type: String,
+        required: true,
         index: true,
         unique: true,
+        index: true
     },
     clicks: { 
         type: Number, 

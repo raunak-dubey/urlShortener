@@ -1,45 +1,33 @@
-
 # URL Shortener — Frontend
 
 This frontend is a Next.js application that provides a user interface to create and use shortened URLs.
-
-Technology
-
-- Next.js
-- React
-- Tailwind CSS
-- axios for HTTP requests
 
 Prerequisites
 
 - Node.js
 - npm (or yarn/pnpm)
 
-Install and run (from `frontend/`)
+## Install and run
 
-	npm install
-	npm run dev
+From the `frontend/` directory:
 
-Scripts (in `package.json`)
+```bash
+npm install
+npm run dev
+```
 
-- dev — start the development server
-- build — build the app for production
-- start — start the production server
-- lint — run ESLint
+## Environment Variables
 
-Environment
+Create a `.env.local` file in the `frontend` directory to set public environment variables.
 
-Use `frontend/.env.local` to set public environment variables (for example `NEXT_PUBLIC_API_URL` to point to the backend API).
+For example, to point to the backend API:
 
-Project structure (key folders)
+```
+NEXT_PUBLIC_API_URL=http://localhost:3000
+```
 
-- `src/app` — application entry (pages and layout)
-- `src/components` — React components
-- `src/api` — client-side API helpers
-- `src/utils` — shared utilities (axios instance)
-- `public` — static assets
-
-API integration
-
-The frontend sends requests to the backend API (example endpoint used: `/api/create`) to create short URLs and uses returned tokens or URLs to present shortened links to the user.
-
+## Available Scripts
+- `dev`: Starts the development server.
+- `build`: Builds the application for production.
+- `start`: Starts a production server.
+- `lint`: Runs ESLint for code analysis.
